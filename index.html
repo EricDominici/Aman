@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Unidades de Medida</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Conversor de Unidades de Medida</h1>
+    <div class="input-group">
+      <label for="valor">Valor a convertir:</label>
+      <input type="number" id="valor" placeholder="Ingrese el valor">
+    </div>
+    <div class="input-group">
+      <label for="categoria">Categoría:</label>
+      <select id="categoria">
+        <option value="longitud">Longitud</option>
+        <option value="peso">Peso</option>
+        <option value="temperatura">Temperatura</option>
+        <option value="tiempo">Tiempo</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="unidadOriginal">Unidad de medida original:</label>
+      <select id="unidadOriginal">
+        <!-- Opciones de unidades según la categoría -->
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="unidadConvertir">Unidad de medida a convertir:</label>
+      <select id="unidadConvertir">
+        <!-- Opciones de unidades según la categoría -->
+      </select>
+    </div>
+    <button onclick="convertir()">Convertir</button>
+    <div id="resultado"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
