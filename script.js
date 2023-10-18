@@ -48,10 +48,8 @@ function cargarUnidades(categoria) {
     const unidadOriginal = document.getElementById("unidadOriginal").value;
     const unidadConvertir = document.getElementById("unidadConvertir").value;
   
-    // Realizar la conversión según la categoría y unidades seleccionadas
     let resultado = convertirUnidades(categoria, unidadOriginal, unidadConvertir, valor);
   
-    // Mostrar el resultado
     document.getElementById("resultado").innerText = `Resultado: ${valor} ${unidadOriginal} es igual a ${resultado} ${unidadConvertir}`;
   }
   
@@ -93,13 +91,12 @@ function cargarUnidades(categoria) {
   }
   
   function convertirTemperatura(unidadOriginal, unidadConvertir, valor) {
-    // Implementa la conversión de temperatura (por ejemplo, de Celsius a Fahrenheit y viceversa)
     if (unidadOriginal === "Grados Celsius" && unidadConvertir === "Grados Fahrenheit") {
       return (valor * 9/5) + 32;
     } else if (unidadOriginal === "Grados Fahrenheit" && unidadConvertir === "Grados Celsius") {
       return (valor - 32) * 5/9;
     } else {
-      return valor; // Sin conversión
+      return valor; 
     }
   }
   
@@ -112,7 +109,6 @@ function cargarUnidades(categoria) {
       "Años": 1 / 31536000
     };
   
-    // El factor de conversión es el inverso de la relación entre las unidades
     return valor * factores[unidadConvertir] / factores[unidadOriginal];
   }
   
@@ -121,6 +117,5 @@ function cargarUnidades(categoria) {
     cargarUnidades(categoria);
   });
   
-  // Cargar las unidades iniciales
   cargarUnidades("longitud");
   
