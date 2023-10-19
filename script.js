@@ -3,7 +3,6 @@ function cargarUnidades(categoria) {
     const unidadesPeso = ["Libras", "Kilogramos", "Gramos", "Onzas"];
     const unidadesTemperatura = ["Grados Celsius", "Grados Fahrenheit", "Kelvin"];
     const unidadesTiempo = ["Segundos", "Minutos", "Horas", "Días", "Años"];
-  
     let unidades;
   
     switch (categoria) {
@@ -70,35 +69,49 @@ function cargarUnidades(categoria) {
   
   function convertirLongitud(unidadOriginal, unidadConvertir, valor) {
     const factores = {
-      "Millas": 0.000621371,
-      "Kilómetros": 0.001,
-      "Metros": 1,
-      "Centímetros": 100,
-      "Pies": 3.28084,
-      "Pulgadas": 39.3701
+      "Millas": 1609.34,
+      "Kilómetros": 1,
+      "Metros": 1000,
+      "Centímetros": 100000,
+      "Pies": 3280.84,
+      "Pulgadas": 39370.1
     };
-    return valor * factores[unidadOriginal] / factores[unidadConvertir];
+  
+    return (valor * factores[unidadConvertir]) / factores[unidadOriginal];
   }
+  
   
   function convertirPeso(unidadOriginal, unidadConvertir, valor) {
     const factores = {
-      "Libras": 2.20462,
+      "Libras": 453.592,
       "Kilogramos": 1,
-      "Gramos": 1000,
-      "Onzas": 35.274
+      "Gramos": 1/1000,
+      "Onzas": 1/35.274
     };
-    return valor * factores[unidadOriginal] / factores[unidadConvertir];
+  
+    return (valor * factores[unidadOriginal]) / factores[unidadConvertir];
   }
   
+  
   function convertirTemperatura(unidadOriginal, unidadConvertir, valor) {
-    if (unidadOriginal === "Grados Celsius" && unidadConvertir === "Grados Fahrenheit") {
-      return (valor * 9/5) + 32;
-    } else if (unidadOriginal === "Grados Fahrenheit" && unidadConvertir === "Grados Celsius") {
-      return (valor - 32) * 5/9;
-    } else {
-      return valor; 
-    }
+    const factores = {
+      "Grados Celsius": {
+        "Grados Fahrenheit": (valor * 9/5) + 32,
+        "Kelvin": valor + 273.15
+      },
+      "Grados Fahrenheit": {
+        "Grados Celsius": (valor - 32) * 5/9,
+        "Kelvin": (valor - 32) * 5/9 + 273.15
+      },
+      "Kelvin": {
+        "Grados Celsius": valor - 273.15,
+        "Grados Fahrenheit": (valor - 273.15) * 9/5 + 32
+      }
+    };
+  
+    return factores[unidadOriginal][unidadConvertir];
   }
+  
   
   function convertirTiempo(unidadOriginal, unidadConvertir, valor) {
     const factores = {
@@ -111,11 +124,11 @@ function cargarUnidades(categoria) {
   
     return valor * factores[unidadConvertir] / factores[unidadOriginal];
   }
-  
+
   document.getElementById("categoria").addEventListener("change", (event) => {
     const categoria = event.target.value;
     cargarUnidades(categoria);
   });
-  
+
   cargarUnidades("longitud");
   
